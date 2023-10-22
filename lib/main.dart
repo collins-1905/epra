@@ -1,6 +1,4 @@
-import 'package:epra/pages/employee_details.dart';
 import 'package:epra/pages/home_page.dart';
-import 'package:epra/pages/licence_status.dart';
 import 'package:flutter/material.dart';
 
 void main() {
