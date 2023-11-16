@@ -9,20 +9,21 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 218, 211, 211),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(200.0), // Set a custom height
           child: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
             elevation: 0,
+            iconTheme: IconThemeData(color: Colors.black),
             //title: Text('Centered Image in AppBar'),
             flexibleSpace: Center(
               child: Stack(
-                alignment: Alignment.center,
+                alignment: Alignment.topCenter,
                 children: <Widget>[
                   Image.asset(
                     'lib/img/epralogo.png', // Replace with your image asset path
-                    width: 400, // Set the width of the image
+                    width: 200, // Set the width of the image
                     height: 100, // Set the height of the image
                   ),
                 ],
@@ -30,21 +31,21 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
+        drawer: Drawer(),
         body: Padding(
-          
           padding: const EdgeInsets.all(
             40.0,
           ), // Add padding around the Column
-          child: Center(
+          child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 //Image.asset('lib/img/epralogo.png'),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Card(
-                  color: Colors.green,
+                  color: Colors.white,
                   elevation: 4, // Add elevation for a card-like effect
                   child: ListTile(
                     leading: Icon(Icons.badge_outlined),
@@ -61,7 +62,7 @@ class HomePage extends StatelessWidget {
                 ),
                 SizedBox(height: 16.0), // Add spacing between ListTiles
                 Card(
-                  color: Colors.blue,
+                  color: Colors.white,
                   elevation: 4,
                   child: ListTile(
                     leading: Icon(Icons.person_2_outlined),
@@ -78,10 +79,10 @@ class HomePage extends StatelessWidget {
                 ),
                 SizedBox(height: 16.0),
                 Card(
-                  color: Colors.red,
+                  color: Colors.white,
                   elevation: 4,
                   child: ListTile(
-                    leading: Icon(Icons.handshake),
+                    leading: Icon(Icons.cases_outlined),
                     title: Text('CONFIRM PPA STATUS'),
                     // subtitle: Text('Subtitle 3'),
                     onTap: () {
@@ -93,7 +94,7 @@ class HomePage extends StatelessWidget {
                 Card(
                   elevation: 4,
                   child: ListTile(
-                    leading: Icon(Icons.person_2_outlined),
+                    leading: Icon(Icons.public),
                     title: Text('EPRA PORTAL LOGIN'),
                     //. subtitle: Text('Subtitle 2'),
                     onTap: () {

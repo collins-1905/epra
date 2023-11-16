@@ -17,6 +17,7 @@ class _LicenceStatusWidgetState extends State<LicenceStatusWidget> {
   String licenceClass = '';
   String licenceStatus = '';
   bool isLoading = false;
+  bool showErrorMessage = false;
   Future<void> getLicenceStatus() async {
     var response = await http.get(Uri.parse(
         'https://portal.erc.go.ke:8200/api/ussdservices/licencestatus?token=w8VcxKr77f6tn4GSVfBe5jiJYag5R4km&LicenceNumber=${_licenceNumberController.text}'));
@@ -31,6 +32,8 @@ class _LicenceStatusWidgetState extends State<LicenceStatusWidget> {
         licenceStatus = finalResponse['message']['LicenceStatus'];
         //isLoading = false;
       });
+    } else {
+      showErrorMessage = true;
     }
     // print(finalResponse['message']['ContactCompanyName']);
   }
@@ -103,6 +106,13 @@ class _LicenceStatusWidgetState extends State<LicenceStatusWidget> {
                   ),
                   hintText: "Enter Licence Number",
                   border: const OutlineInputBorder()),
+            ),
+            Text(
+              showErrorMessage
+                  ? "Licence not found"
+                  : "", // Show the message if licenceStatus is empty
+              style: TextStyle(
+                  color: Colors.red), // You can customize the text style
             ),
             const SizedBox(height: 25),
             MaterialButton(
