@@ -1,6 +1,8 @@
 import 'package:epra/pages/employee_details.dart';
 import 'package:epra/pages/epra_portal.dart';
 import 'package:epra/pages/licence_status.dart';
+import 'package:epra/pages/ppa_status.dart';
+import 'package:epra/pages/pump_prices.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -48,6 +50,24 @@ class HomePage extends StatelessWidget {
                   color: Colors.white,
                   elevation: 4, // Add elevation for a card-like effect
                   child: ListTile(
+                    leading: Icon(Icons.gas_meter_outlined),
+                    title: Text('CURRENT PUMP PRICES'),
+                    //subtitle: Text('Subtitle 1'),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PetroleumTownWidget()));
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Card(
+                  color: Colors.white,
+                  elevation: 4, // Add elevation for a card-like effect
+                  child: ListTile(
                     leading: Icon(Icons.badge_outlined),
                     title: Text('CONFIRM EPRA LICENCE'),
                     //subtitle: Text('Subtitle 1'),
@@ -83,10 +103,13 @@ class HomePage extends StatelessWidget {
                   elevation: 4,
                   child: ListTile(
                     leading: Icon(Icons.cases_outlined),
-                    title: Text('CONFIRM PPA STATUS'),
+                    title: Text('CHECK PPA STATUS'),
                     // subtitle: Text('Subtitle 3'),
                     onTap: () {
-                      // Add your onTap action here for ListTile 3
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PPAStatusWidget()));
                     },
                   ),
                 ),

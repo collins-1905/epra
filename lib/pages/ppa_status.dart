@@ -18,7 +18,7 @@ class _PPAStatusWidgetState extends State<PPAStatusWidget> {
   bool showErrorMessage = false;
   Future<void> getLicenceStatus() async {
     var response = await http.get(Uri.parse(
-        'https://portal.erc.go.ke:8200/api/ussdservices/licencestatus?token=w8VcxKr77f6tn4GSVfBe5jiJYag5R4km&LicenceNumber=${_ppaStatusController.text}'));
+        'https://portal.erc.go.ke:8200/api/ussdservices/ppa-progress?token=w8VcxKr77f6tn4GSVfBe5jiJYag5R4km&ref=${_ppaStatusController.text}'));
     if (response.statusCode == 200) {
       Map<String, dynamic> finalResponse = jsonDecode(response.body);
 
@@ -78,9 +78,9 @@ class _PPAStatusWidgetState extends State<PPAStatusWidget> {
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(projectTitle),
-                          Text(powerGenerator),
-                          Text(status),
+                          Text('Project Title: $projectTitle'),
+                          Text('Power Generator: $powerGenerator'),
+                          Text('Status: $status'),
                         ],
                       ),
                     ),
@@ -105,7 +105,7 @@ class _PPAStatusWidgetState extends State<PPAStatusWidget> {
               showErrorMessage
                   ? "Licence not found"
                   : "", // Show the message if licenceStatus is empty
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.red), // You can customize the text style
             ),
             const SizedBox(height: 25),
