@@ -25,8 +25,8 @@ class HomePage extends StatelessWidget {
                 children: <Widget>[
                   Image.asset(
                     'lib/img/epralogo.png', // Replace with your image asset path
-                    width: 200, // Set the width of the image
-                    height: 100, // Set the height of the image
+                    width: 300, // Set the width of the image
+                    height: 300, // Set the height of the image
                   ),
                 ],
               ),
@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
                   color: Colors.white,
                   elevation: 4, // Add elevation for a card-like effect
                   child: ListTile(
-                    leading: Icon(Icons.gas_meter_outlined),
+                    leading: Icon(Icons.local_gas_station),
                     title: Text('CURRENT PUMP PRICES'),
                     //subtitle: Text('Subtitle 1'),
                     onTap: () {
@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
                   elevation: 4, // Add elevation for a card-like effect
                   child: ListTile(
                     leading: Icon(Icons.badge_outlined),
-                    title: Text('CONFIRM EPRA LICENCE'),
+                    title: Text('VERIFY EPRA LICENCE'),
                     //subtitle: Text('Subtitle 1'),
                     onTap: () {
                       Navigator.push(

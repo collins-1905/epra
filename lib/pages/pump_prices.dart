@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class MyApp extends StatelessWidget {
   @override
@@ -16,6 +18,24 @@ class PetroleumTownWidget extends StatefulWidget {
 }
 
 class _PetroleumTownWidgetState extends State<PetroleumTownWidget> {
+  String selectedTownID = '';
+  Future<void> getPumpPrices(String townID) async {
+    var response = await http.get(Uri.parse(
+        'https://portal.erc.go.ke:8200/api/ussdservices/pumpprice?token=w8VcxKr77f6tn4GSVfBe5jiJYag5R4km&PetroleumTownID=${townID}'));
+    if (response.statusCode == 200) {
+      Map<String, dynamic> finalResponse = jsonDecode(response.body);
+      print(finalResponse);
+      // setState(() {
+      //   contactCompanyName = finalResponse['message']['ContactCompanyName'];
+      //   licenceExpiryDate = finalResponse['message']['LicenceExpiryDate'];
+      //   licenceType = finalResponse['message']['LicenceType'];
+      //   licenceClass = finalResponse['message']['LicenceClass'];
+      //   licenceStatus = finalResponse['message']['LicenceStatus'];
+      //   //isLoading = false;
+      // });
+    }
+  }
+
   // Sample list of petroleum towns with IDs
   List<Map<String, dynamic>> petroleumTowns = [
     {"PetroleumTownID": "1", "PetroleumTownName": "Mombasa"},
@@ -297,8 +317,8 @@ class _PetroleumTownWidgetState extends State<PetroleumTownWidget> {
                       // Pass the selected town ID to the text editing controller
                       String selectedTownID =
                           searchResults[index]['PetroleumTownID'];
+                      getPumpPrices(selectedTownID);
                       // Here you can use selectedTownID as needed
-                      print('Selected Town ID: $selectedTownID');
                     },
                   );
                 },

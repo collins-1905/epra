@@ -54,7 +54,7 @@ class _PPAStatusWidgetState extends State<PPAStatusWidget> {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const HomePage()));
             }),
-        title: const Text("CONFIRM PPA LICENCE"),
+        title: const Text("CONFIRM PPA STATUS"),
         centerTitle: true,
       ),
       body: Padding(
