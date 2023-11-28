@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(200.0), // Set a custom height
+          preferredSize: Size.fromHeight(100.0), // Set a custom height
           child: AppBar(
             backgroundColor: const Color.fromARGB(255, 255, 255, 255),
             elevation: 0,
@@ -47,10 +47,11 @@ class HomePage extends StatelessWidget {
                   height: 30,
                 ),
                 Card(
-                  color: Colors.white,
+                  color: const Color.fromARGB(255, 255, 255, 255),
                   elevation: 4, // Add elevation for a card-like effect
                   child: ListTile(
-                    leading: Icon(Icons.local_gas_station),
+                    tileColor: Colors.lightBlueAccent,
+                    leading: Icon(Icons.local_gas_station_outlined),
                     title: Text('CURRENT PUMP PRICES'),
                     //subtitle: Text('Subtitle 1'),
                     onTap: () {
@@ -68,6 +69,7 @@ class HomePage extends StatelessWidget {
                   color: Colors.white,
                   elevation: 4, // Add elevation for a card-like effect
                   child: ListTile(
+                    tileColor: Colors.lightBlueAccent,
                     leading: Icon(Icons.badge_outlined),
                     title: Text('VERIFY EPRA LICENCE'),
                     //subtitle: Text('Subtitle 1'),
@@ -85,6 +87,7 @@ class HomePage extends StatelessWidget {
                   color: Colors.white,
                   elevation: 4,
                   child: ListTile(
+                    tileColor: Colors.lightBlueAccent,
                     leading: Icon(Icons.person_2_outlined),
                     title: Text('CONFIRM EPRA EMPLOYEE'),
                     //. subtitle: Text('Subtitle 2'),
@@ -102,6 +105,7 @@ class HomePage extends StatelessWidget {
                   color: Colors.white,
                   elevation: 4,
                   child: ListTile(
+                    tileColor: Colors.lightBlueAccent,
                     leading: Icon(Icons.cases_outlined),
                     title: Text('CHECK PPA STATUS'),
                     // subtitle: Text('Subtitle 3'),
@@ -117,7 +121,8 @@ class HomePage extends StatelessWidget {
                 Card(
                   elevation: 4,
                   child: ListTile(
-                    leading: Icon(Icons.public),
+                    tileColor: Colors.lightBlueAccent,
+                    leading: Icon(Icons.public_outlined),
                     title: Text('EPRA PORTAL LOGIN'),
                     //. subtitle: Text('Subtitle 2'),
                     onTap: () {

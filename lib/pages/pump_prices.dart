@@ -1,8 +1,14 @@
+import 'package:epra/models/pump_prices.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,21 +25,59 @@ class PetroleumTownWidget extends StatefulWidget {
 
 class _PetroleumTownWidgetState extends State<PetroleumTownWidget> {
   String selectedTownID = '';
-  Future<void> getPumpPrices(String townID) async {
+  String townName = '';
+  String productText = '';
+  String pumpPrice = '';
+
+  Future<List<PetroleumPrice>> getPumpPrices(String townID) async {
     var response = await http.get(Uri.parse(
         'https://portal.erc.go.ke:8200/api/ussdservices/pumpprice?token=w8VcxKr77f6tn4GSVfBe5jiJYag5R4km&PetroleumTownID=${townID}'));
     if (response.statusCode == 200) {
-      Map<String, dynamic> finalResponse = jsonDecode(response.body);
-      print(finalResponse);
-      // setState(() {
-      //   contactCompanyName = finalResponse['message']['ContactCompanyName'];
-      //   licenceExpiryDate = finalResponse['message']['LicenceExpiryDate'];
-      //   licenceType = finalResponse['message']['LicenceType'];
-      //   licenceClass = finalResponse['message']['LicenceClass'];
-      //   licenceStatus = finalResponse['message']['LicenceStatus'];
-      //   //isLoading = false;
-      // });
+      List<dynamic> responseData = jsonDecode(response.body)['message'];
+      List<PetroleumPrice> prices = responseData.map((data) {
+        return PetroleumPrice.fromJson(data);
+      }).toList();
+
+      // Now 'prices' contains the parsed data for each product in the town
+      // Do what you need to do with this data
+      for (var price in prices) {
+        print(
+            'Town: ${price.townName}, Product: ${price.productText}, Price: ${price.pumpPrice}');
+      }
+      return prices;
+    } else {
+      throw Exception('Failed to Load');
     }
+  }
+
+  Future<void> showPumpPricesDialog(
+      String townName, List<PetroleumPrice> prices) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(townName),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: prices.map((price) {
+                return ListTile(
+                  title: Text(price.productText),
+                  subtitle: Text('Price: ${price.pumpPrice}'),
+                );
+              }).toList(),
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   // Sample list of petroleum towns with IDs
@@ -290,7 +334,7 @@ class _PetroleumTownWidgetState extends State<PetroleumTownWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search Petroleum Towns'),
+        title: Text('CURRENT PUMP PRICES'),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -317,7 +361,10 @@ class _PetroleumTownWidgetState extends State<PetroleumTownWidget> {
                       // Pass the selected town ID to the text editing controller
                       String selectedTownID =
                           searchResults[index]['PetroleumTownID'];
-                      getPumpPrices(selectedTownID);
+                      getPumpPrices(selectedTownID).then((prices) {
+                        showPumpPricesDialog(
+                            searchResults[index]['PetroleumTownName'], prices);
+                      });
                       // Here you can use selectedTownID as needed
                     },
                   );
