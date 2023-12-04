@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:epra/models/pump_prices.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -30,23 +32,48 @@ class _PetroleumTownWidgetState extends State<PetroleumTownWidget> {
   String pumpPrice = '';
 
   Future<List<PetroleumPrice>> getPumpPrices(String townID) async {
-    var response = await http.get(Uri.parse(
-        'https://portal.erc.go.ke:8200/api/ussdservices/pumpprice?token=w8VcxKr77f6tn4GSVfBe5jiJYag5R4km&PetroleumTownID=${townID}'));
-    if (response.statusCode == 200) {
-      List<dynamic> responseData = jsonDecode(response.body)['message'];
-      List<PetroleumPrice> prices = responseData.map((data) {
-        return PetroleumPrice.fromJson(data);
-      }).toList();
+    try {
+      var response = await http.get(Uri.parse(
+          'https://portal.erc.go.ke:8200/api/ussdservices/pumpprice?token=w8VcxKr77f6tn4GSVfBe5jiJYag5R4km&PetroleumTownID=${townID}'));
+      if (response.statusCode == 200) {
+        List<dynamic> responseData = jsonDecode(response.body)['message'];
+        List<PetroleumPrice> prices = responseData.map((data) {
+          return PetroleumPrice.fromJson(data);
+        }).toList();
 
-      // Now 'prices' contains the parsed data for each product in the town
-      // Do what you need to do with this data
-      for (var price in prices) {
-        print(
-            'Town: ${price.townName}, Product: ${price.productText}, Price: ${price.pumpPrice}');
+        // Now 'prices' contains the parsed data for each product in the town
+        // Do what you need to do with this data
+        for (var price in prices) {
+          print(
+              'Town: ${price.townName}, Product: ${price.productText}, Price: ${price.pumpPrice}');
+        }
+        return prices;
+      } else {
+        throw Exception('Failed to Load');
       }
-      return prices;
-    } else {
-      throw Exception('Failed to Load');
+    } catch (e) {
+      if (e is SocketException) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Error'),
+              content: const Text(
+                  'Failed to fetch pump prices. Please check your internet connection.'),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+      // Re-throw the exception to propagate it to the calling code
+      throw e;
     }
   }
 
