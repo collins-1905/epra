@@ -3,6 +3,7 @@ import 'package:epra/pages/epra_portal.dart';
 import 'package:epra/pages/licence_status.dart';
 import 'package:epra/pages/ppa_status.dart';
 import 'package:epra/pages/pump_prices.dart';
+import 'package:epra/pages/verify_truck.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -105,6 +106,23 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16.0),
+              Card(
+                color: Colors.white,
+                elevation: 4,
+                child: ListTile(
+                  tileColor: Colors.lightBlueAccent,
+                  leading: const Icon(Icons.local_shipping_outlined),
+                  title: const Text('VERIFY TRUCK'),
+                  //. subtitle: Text('Subtitle 2'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const VerifyTruckWidget()));
+                  },
+                ),
+              ),
+              const SizedBox(height: 16.09),
               Card(
                 color: Colors.white,
                 elevation: 4,

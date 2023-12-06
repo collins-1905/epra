@@ -2,7 +2,6 @@ import 'package:epra/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-//import 'package:epra/models/employee_details.dart';
 
 class EmployeeDetailsWidget extends StatefulWidget {
   const EmployeeDetailsWidget({Key? key}) : super(key: key);
