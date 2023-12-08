@@ -22,12 +22,12 @@ class HomePage extends StatelessWidget {
         preferredSize: const Size.fromHeight(100.0), // Set a custom height
         child: AppBar(
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-          elevation: 0,
+          elevation: 5,
           iconTheme: const IconThemeData(color: Colors.black),
           //title: Text('Centered Image in AppBar'),
           flexibleSpace: Center(
             child: Stack(
-              alignment: Alignment.topCenter,
+              alignment: Alignment.bottomLeft,
               children: <Widget>[
                 Image.asset(
                   'lib/img/epralogo.png', // Replace with your image asset path
@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
       drawer: const Drawer(),
       body: Padding(
         padding: const EdgeInsets.all(
-          40.0,
+          20.0,
         ), // Add padding around the Column
         child: SingleChildScrollView(
           child: Column(
@@ -58,7 +58,10 @@ class HomePage extends StatelessWidget {
                 child: ListTile(
                   tileColor: Colors.lightBlueAccent,
                   leading: const Icon(Icons.local_gas_station_outlined),
-                  title: const Text('CURRENT PUMP PRICES'),
+                  title: const Text(
+                    'Current Pump Prices',
+                    style: TextStyle(fontSize: 18),
+                  ),
                   //subtitle: Text('Subtitle 1'),
                   onTap: () {
                     Navigator.push(
@@ -77,7 +80,10 @@ class HomePage extends StatelessWidget {
                 child: ListTile(
                   tileColor: Colors.lightBlueAccent,
                   leading: const Icon(Icons.badge_outlined),
-                  title: const Text('VERIFY EPRA LICENCE'),
+                  title: const Text(
+                    'Verify EPRA Licence',
+                    style: TextStyle(fontSize: 18),
+                  ),
                   //subtitle: Text('Subtitle 1'),
                   onTap: () {
                     Navigator.push(
@@ -94,7 +100,10 @@ class HomePage extends StatelessWidget {
                 child: ListTile(
                   tileColor: Colors.lightBlueAccent,
                   leading: const Icon(Icons.person_2_outlined),
-                  title: const Text('CONFIRM EPRA EMPLOYEE'),
+                  title: const Text(
+                    'Confirm EPRA Employee',
+                    style: TextStyle(fontSize: 18),
+                  ),
                   //. subtitle: Text('Subtitle 2'),
                   onTap: () {
                     Navigator.push(
@@ -112,7 +121,10 @@ class HomePage extends StatelessWidget {
                 child: ListTile(
                   tileColor: Colors.lightBlueAccent,
                   leading: const Icon(Icons.local_shipping_outlined),
-                  title: const Text('VERIFY TRUCK'),
+                  title: const Text(
+                    'Verify Truck',
+                    style: TextStyle(fontFamily: "Roboto", fontSize: 18),
+                  ),
                   //. subtitle: Text('Subtitle 2'),
                   onTap: () {
                     Navigator.push(
@@ -129,7 +141,10 @@ class HomePage extends StatelessWidget {
                 child: ListTile(
                   tileColor: Colors.lightBlueAccent,
                   leading: const Icon(Icons.cases_outlined),
-                  title: const Text('CHECK PPA STATUS'),
+                  title: const Text(
+                    'Check PPA Status',
+                    style: TextStyle(fontSize: 18),
+                  ),
                   // subtitle: Text('Subtitle 3'),
                   onTap: () {
                     Navigator.push(
@@ -145,7 +160,7 @@ class HomePage extends StatelessWidget {
                 child: ListTile(
                   tileColor: Colors.lightBlueAccent,
                   leading: const Icon(Icons.public_outlined),
-                  title: const Text('EPRA PORTAL LOGIN'),
+                  title: const Text('EPRA Portal Login'),
                   //. subtitle: Text('Subtitle 2'),
                   onTap: () {
                     Navigator.push(
