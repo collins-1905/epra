@@ -21,7 +21,7 @@ class _LicenceStatusWidgetState extends State<LicenceStatusWidget> {
   Future<void> getLicenceStatus() async {
     var response = await http.get(Uri.parse(
         'https://portal.erc.go.ke:8200/api/ussdservices/licencestatus?token=w8VcxKr77f6tn4GSVfBe5jiJYag5R4km&LicenceNumber=${_licenceNumberController.text}'));
-    if (response.statusCode == 200) {
+    if (!response.body.contains('Unsuccessful')) {
       Map<String, dynamic> finalResponse = jsonDecode(response.body);
 
       setState(() {
@@ -33,7 +33,22 @@ class _LicenceStatusWidgetState extends State<LicenceStatusWidget> {
         //isLoading = false;
       });
     } else {
-      showErrorMessage = true;
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Licence Not Found"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
     }
     // print(finalResponse['message']['ContactCompanyName']);
   }
@@ -77,7 +92,7 @@ class _LicenceStatusWidgetState extends State<LicenceStatusWidget> {
                 SizedBox(
                   height: 150,
                   child: Card(
-                    color: Color.fromARGB(255, 0, 187, 212),
+                    color: Color.fromARGB(255, 18, 212, 0),
                     child: ListTile(
                       title: Text(contactCompanyName),
                       subtitle: Column(
@@ -106,13 +121,6 @@ class _LicenceStatusWidgetState extends State<LicenceStatusWidget> {
                   ),
                   hintText: "Enter Licence Number",
                   border: const OutlineInputBorder()),
-            ),
-            Text(
-              showErrorMessage
-                  ? "Licence not found"
-                  : "", // Show the message if licenceStatus is empty
-              style: TextStyle(
-                  color: Colors.red), // You can customize the text style
             ),
             const SizedBox(height: 25),
             MaterialButton(
