@@ -1,4 +1,5 @@
 import 'package:epra/pages/about.dart';
+import 'package:epra/pages/contact.dart';
 import 'package:epra/pages/faq.dart';
 import 'package:epra/pages/employee_details.dart';
 import 'package:epra/pages/epra_portal.dart';
@@ -88,6 +89,18 @@ class HomePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => EPRAFunctionsPage()));
+                }
+              },
+            ),
+            ListTile(
+              title: const Text(
+                'CONTACT US',
+                textAlign: TextAlign.center,
+              ),
+              onTap: () {
+                {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ContactUsPage()));
                 }
               },
             ),

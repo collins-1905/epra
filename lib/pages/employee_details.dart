@@ -113,6 +113,7 @@ class _EmployeeDetailsWidgetState extends State<EmployeeDetailsWidget> {
               height: 30,
             ),
             TextField(
+              keyboardType: TextInputType.number,
               controller: _employeeIDController,
               decoration: InputDecoration(
                   suffixIcon: IconButton(
@@ -127,6 +128,7 @@ class _EmployeeDetailsWidgetState extends State<EmployeeDetailsWidget> {
               height: 20,
             ),
             TextField(
+              keyboardType: TextInputType.number,
               controller: _employeePhoneController,
               decoration: InputDecoration(
                   suffixIcon: IconButton(
