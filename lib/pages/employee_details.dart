@@ -22,7 +22,7 @@ class _EmployeeDetailsWidgetState extends State<EmployeeDetailsWidget> {
   Future<void> getEmployeeDetails() async {
     var response = await http.get(Uri.parse(
         'https://portal.erc.go.ke:8200/api/ussdservices/employee?token=w8VcxKr77f6tn4GSVfBe5jiJYag5R4km&IDNumber=${_employeeIDController.text}&MobileNumber=${_employeePhoneController.text}'));
-    if (response.statusCode == 200) {
+    if (!response.body.contains("Invalid")) {
       Map<String, dynamic> finalResponse = jsonDecode(response.body);
 
       setState(() {
@@ -32,6 +32,24 @@ class _EmployeeDetailsWidgetState extends State<EmployeeDetailsWidget> {
 
         isLoading = false;
       });
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.red,
+            title: Text("Not Found"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
     }
     // print(finalResponse['message']['ContactCompanyName']);
   }

@@ -1,3 +1,4 @@
+import 'package:epra/pages/faq.dart';
 import 'package:epra/pages/employee_details.dart';
 import 'package:epra/pages/epra_portal.dart';
 import 'package:epra/pages/licence_status.dart';
@@ -39,7 +40,45 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      drawer: const Drawer(),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: const Text('Home'),
+              onTap: () {
+                {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomePage()));
+                }
+              },
+            ),
+            ListTile(
+              title: const Text('FAQs'),
+              onTap: () {
+                {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => FAQPage()));
+                }
+              },
+            ),
+            ListTile(
+              title: const Text('Item 3'),
+              onTap: () {
+                // Add your function for Item 3
+              },
+            ),
+          ],
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(
           20.0,
@@ -160,7 +199,10 @@ class HomePage extends StatelessWidget {
                 child: ListTile(
                   tileColor: Colors.lightBlueAccent,
                   leading: const Icon(Icons.public_outlined),
-                  title: const Text('EPRA Portal Login'),
+                  title: const Text(
+                    'EPRA Portal Login',
+                    style: TextStyle(fontSize: 18),
+                  ),
                   //. subtitle: Text('Subtitle 2'),
                   onTap: () {
                     Navigator.push(

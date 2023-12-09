@@ -37,6 +37,7 @@ class _LicenceStatusWidgetState extends State<LicenceStatusWidget> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
+            backgroundColor: Colors.red,
             title: Text("Licence Not Found"),
             actions: [
               TextButton(
