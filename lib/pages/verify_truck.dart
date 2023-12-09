@@ -79,9 +79,9 @@ class _VerifyTruckWidgetState extends State<VerifyTruckWidget> {
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(licenceNumber),
+                          Text("Licence Number $licenceNumber"),
                           Text(vehicleType),
-                          Text(licenceExpiryDate),
+                          Text("Expires on $licenceExpiryDate"),
                         ],
                       ),
                     ),

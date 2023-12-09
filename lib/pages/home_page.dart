@@ -1,3 +1,4 @@
+import 'package:epra/pages/about.dart';
 import 'package:epra/pages/faq.dart';
 import 'package:epra/pages/employee_details.dart';
 import 'package:epra/pages/epra_portal.dart';
@@ -45,13 +46,16 @@ class HomePage extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             const DrawerHeader(
-              child: Text('Drawer Header'),
+              child: Text(''),
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.white,
               ),
             ),
             ListTile(
-              title: const Text('Home'),
+              title: const Text(
+                'HOME',
+                textAlign: TextAlign.center,
+              ),
               onTap: () {
                 {
                   Navigator.push(
@@ -62,7 +66,10 @@ class HomePage extends StatelessWidget {
               },
             ),
             ListTile(
-              title: const Text('FAQs'),
+              title: const Text(
+                'FAQs',
+                textAlign: TextAlign.center,
+              ),
               onTap: () {
                 {
                   Navigator.push(context,
@@ -71,9 +78,17 @@ class HomePage extends StatelessWidget {
               },
             ),
             ListTile(
-              title: const Text('Item 3'),
+              title: const Text(
+                'ABOUT US',
+                textAlign: TextAlign.center,
+              ),
               onTap: () {
-                // Add your function for Item 3
+                {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EPRAFunctionsPage()));
+                }
               },
             ),
           ],
