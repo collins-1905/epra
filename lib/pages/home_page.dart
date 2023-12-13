@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(100.0), // Set a custom height
         child: AppBar(
@@ -43,6 +43,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       drawer: Drawer(
+        backgroundColor: Colors.white,
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -80,7 +81,7 @@ class HomePage extends StatelessWidget {
             ),
             ListTile(
               title: const Text(
-                'ABOUT US',
+                'ABOUT EPRA',
                 textAlign: TextAlign.center,
               ),
               onTap: () {

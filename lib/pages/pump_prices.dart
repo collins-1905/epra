@@ -30,8 +30,12 @@ class _PetroleumTownWidgetState extends State<PetroleumTownWidget> {
   String townName = '';
   String productText = '';
   String pumpPrice = '';
+  bool isLoading = false;
 
   Future<List<PetroleumPrice>> getPumpPrices(String townID) async {
+    setState(() {
+      isLoading = true;
+    });
     try {
       var response = await http.get(Uri.parse(
           'https://portal.erc.go.ke:8200/api/ussdservices/pumpprice?token=w8VcxKr77f6tn4GSVfBe5jiJYag5R4km&PetroleumTownID=${townID}'));
@@ -74,6 +78,10 @@ class _PetroleumTownWidgetState extends State<PetroleumTownWidget> {
       }
       // Re-throw the exception to propagate it to the calling code
       throw e;
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -379,24 +387,31 @@ class _PetroleumTownWidgetState extends State<PetroleumTownWidget> {
             ),
             SizedBox(height: 16.0),
             Expanded(
-              child: ListView.builder(
-                itemCount: searchResults.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(searchResults[index]['PetroleumTownName']),
-                    onTap: () {
-                      // Pass the selected town ID to the text editing controller
-                      String selectedTownID =
-                          searchResults[index]['PetroleumTownID'];
-                      getPumpPrices(selectedTownID).then((prices) {
-                        showPumpPricesDialog(
-                            searchResults[index]['PetroleumTownName'], prices);
-                      });
-                      // Here you can use selectedTownID as needed
-                    },
-                  );
-                },
-              ),
+              child: isLoading
+                  ? Center(
+                      child:
+                          CircularProgressIndicator(), // Show circular progress indicator while loading
+                    )
+                  : ListView.builder(
+                      itemCount: searchResults.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title:
+                              Text(searchResults[index]['PetroleumTownName']),
+                          onTap: () {
+                            // Pass the selected town ID to the text editing controller
+                            String selectedTownID =
+                                searchResults[index]['PetroleumTownID'];
+                            getPumpPrices(selectedTownID).then((prices) {
+                              showPumpPricesDialog(
+                                  searchResults[index]['PetroleumTownName'],
+                                  prices);
+                            });
+                            // Here you can use selectedTownID as needed
+                          },
+                        );
+                      },
+                    ),
             ),
           ],
         ),
